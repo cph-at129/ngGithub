@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="card col-md-12 searchGithubCard">
+    <div class="card-header">
+      <form>
+        <div class="form-group">
+          <label for="searchBox1">Search for github users</label>
+          <input type="text" id="searchBox1" name="searchUsername" class="form-control" [(ngModel)]="searchUsername" (keyup)="searchUser()"
+            placeholder="Search github...">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="card text-center" *ngIf="user">
+  <div class="card-header">
+    Github
+  </div>
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-header">
+            Github Profile
+          </div>
+          <img class="card-img-top" src="{{user.avatar_url}}" alt="My avatar">
+          <h3 class="card-title">{{user.name}}</h3>
+          <h4 class="card-title"><strong>{{user.login}}</strong></h4>
+          <h5 class="card-title">{{user.location}}</h5>
+          <p class="card-text">{{user.bio}}</p>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-info justify-content-between">public repos
+              <span class="badge badge-default badge-pill">{{user.public_repos}}</span>
+            </li>
+            <li class="list-group-item list-group-item-warning justify-content-between">public gists
+              <span class="badge badge-default badge-pill">{{user.public_gists}}</span>
+            </li>
+            <li class="list-group-item list-group-item-success justify-content-between">followers
+              <span class="badge badge-default badge-pill">{{user.followers}}</span>
+            </li>
+            <li class="list-group-item list-group-item-danger justify-content-between">following
+              <span class="badge badge-default badge-pill">{{user.following}}</span>
+            </li>
+          </ul>
+          <div class="card-block">
+            <a href="{{user.blog}}" class="card-link" target="_blank">My blog</a>
+            <a href="{{user.html_url}}" class="card-link" target="_blank">Github profile</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card text-center">
+          <div class="card-header">
+            {{repos?.length}} Github Repos
+          </div>
+          <div class="card-block">
+            <div class="list-group">
+              <a href="{{repo.html_url}}" target="_blank" class="list-group-item" *ngFor="let repo of repos">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{repo.full_name}}</h5>
+                  <small><span class="badge badge-success">{{repo.language}}</span></small>
+                </div>
+                <small class="text-muted">{{repo.description}}</small>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
